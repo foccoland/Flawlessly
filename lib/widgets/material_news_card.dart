@@ -5,16 +5,20 @@ import 'package:flutter/widgets.dart';
 class MaterialNewsCard extends StatelessWidget {
   final String title;
   final String description;
+  final String imageUrl;
 
   const MaterialNewsCard(
-      {super.key, required this.title, required this.description});
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, left: 5, right: 5),
       child: Card(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
         child: Column(
@@ -28,11 +32,16 @@ class MaterialNewsCard extends StatelessWidget {
                 ),
               ),
               clipBehavior: Clip.antiAlias,
-              child: Image.network(
-                "https://placehold.co/300x150/png",
-                width: double.infinity,
-                fit: BoxFit.fill,
-              ),
+              child: !imageUrl.contains("null")
+                  ? Image.network(
+                      imageUrl,
+                      width: double.infinity,
+                      fit: BoxFit.fill,
+                    )
+                  : const Center(
+                      child: FlutterLogo(
+                      size: 150,
+                    )),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, left: 8.0),

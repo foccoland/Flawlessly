@@ -7,14 +7,14 @@ String newsEverythingResponseToJson(NewsEverythingResponse data) =>
     json.encode(data.toJson());
 
 class NewsEverythingResponse {
-  String status;
-  int totalResults;
-  List<Article> articles;
+  String? status;
+  int? totalResults;
+  List<Article>? articles;
 
   NewsEverythingResponse({
-    required this.status,
-    required this.totalResults,
-    required this.articles,
+    this.status,
+    this.totalResults,
+    this.articles,
   });
 
   factory NewsEverythingResponse.fromJson(Map<String, dynamic> json) =>
@@ -32,32 +32,33 @@ class NewsEverythingResponse {
         "status": status,
         "totalResults": totalResults,
         "articles": List<dynamic>.from(
-          articles.map(
-            (article) => article.toJson(),
-          ),
+          articles?.map(
+                (article) => article.toJson(),
+              ) ??
+              [],
         ),
       };
 }
 
 class Article {
-  Source source;
-  String author;
-  String title;
-  String description;
-  String url;
-  String urlToImage;
-  DateTime publishedAt;
-  String content;
+  Source? source;
+  String? author;
+  String? title;
+  String? description;
+  String? url;
+  String? urlToImage;
+  DateTime? publishedAt;
+  String? content;
 
   Article({
-    required this.source,
-    required this.author,
-    required this.title,
-    required this.description,
-    required this.url,
-    required this.urlToImage,
-    required this.publishedAt,
-    required this.content,
+    this.source,
+    this.author,
+    this.title,
+    this.description,
+    this.url,
+    this.urlToImage,
+    this.publishedAt,
+    this.content,
   });
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
@@ -72,24 +73,24 @@ class Article {
       );
 
   Map<String, dynamic> toJson() => {
-        "source": source.toJson(),
+        "source": source?.toJson(),
         "author": author,
         "title": title,
         "description": description,
         "url": url,
         "urlToImage": urlToImage,
-        "publishedAt": publishedAt.toIso8601String(),
+        "publishedAt": publishedAt?.toIso8601String(),
         "content": content,
       };
 }
 
 class Source {
-  String id;
-  String name;
+  String? id;
+  String? name;
 
   Source({
-    required this.id,
-    required this.name,
+    this.id,
+    this.name,
   });
 
   factory Source.fromJson(Map<String, dynamic> json) => Source(
